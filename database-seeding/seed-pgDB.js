@@ -49,6 +49,7 @@ const createCarpetTable = () => {
     roll_yards REAL,
     tag_num INT,
     location VARCHAR(6),
+    removedBy VARCHAR(15),
     tag_date DATE,
     location_date DATE
   )`;
