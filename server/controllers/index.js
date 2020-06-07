@@ -14,7 +14,7 @@ module.exports = {
       }));
   },
   getCarpetByShipmentId: (req, res) => {
-    const { shipmentId } = req.query;
+    const { shipmentId } = req.params;
 
     if (shipmentId) {
       models.getCarpetByShipmentId(shipmentId)
