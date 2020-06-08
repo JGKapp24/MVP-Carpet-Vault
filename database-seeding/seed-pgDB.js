@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const path = require('path');
 const db = require('../database/index.js');
 
@@ -48,6 +49,7 @@ const createCarpetTable = () => {
     roll_yards REAL,
     tag_num INT,
     location VARCHAR(6),
+    removedBy VARCHAR(15),
     tag_date DATE,
     location_date DATE
   )`;
