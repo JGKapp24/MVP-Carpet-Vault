@@ -1,0 +1,26 @@
+.home {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+}
+
+.home-links a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #BD2D43;
+}
+
+.home-links a:hover{
+  color: #F03A54;
+}
+
+.image-credit {
+  font-size: 10px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.image-credit a {
+  text-decoration: none;
+  color: #703D44;
+  cursor: pointer;
+}
