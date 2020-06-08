@@ -9,6 +9,16 @@ module.exports = {
     return db.query(sqlString);
   },
 
+  getShipmentById: (shipmentId) => {
+    const sqlString = `SELECT shipments.*, carriers.carrier_name
+    FROM shipments
+    JOIN carriers
+    ON shipments.carrier_id = carriers.carrier_id
+    WHERE shipment_id = $1`;
+
+    return db.query(sqlString, [shipmentId]);
+  },
+
   getCarpetByShipmentId: (shipmentId) => {
     const sqlString = `SELECT cpt.*, v1.vendor_name AS shipper_name, v2.vendor_name AS consignee_name
     FROM carpet cpt
