@@ -29,6 +29,7 @@ const createShipmentsTable = () => {
   const sqlString = `CREATE TABLE shipments(
     shipment_id SERIAL PRIMARY KEY,
     trailer_num INT,
+    load_num VARCHAR(10),
     ship_date DATE,
     carrier_id INT REFERENCES carriers (carrier_id)
   )`;
@@ -71,9 +72,9 @@ const seedCarrier = () => {
 };
 
 const seedShipment = () => {
-  const sqlString = `INSERT INTO shipments (trailer_num, ship_date, carrier_id)
-  VALUES ($1, $2, $3)`;
-  const sqlValues = [5475, '2020-06-05', 1];
+  const sqlString = `INSERT INTO shipments (trailer_num, load_num, ship_date, carrier_id)
+  VALUES ($1, $2, $3, $4)`;
+  const sqlValues = [5475, 'DEN-20232', '2020-06-05', 1];
 
   return db.query(sqlString, sqlValues);
 };
