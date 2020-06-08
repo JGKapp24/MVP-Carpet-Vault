@@ -3,6 +3,22 @@
   text-align: center;
 }
 
+.header {
+  font-family: 'Ubuntu', sans-serif;
+  text-align: left;
+  height: 45px;
+}
+
+.header-logo {
+  height: inherit;
+}
+
+h2.header-title {
+  display: inline-block;
+  margin: 0;
+  color: #BD2D43;
+}
+
 .home-links a {
   text-decoration: none;
   cursor: pointer;
@@ -23,4 +39,37 @@
   text-decoration: none;
   color: #703D44;
   cursor: pointer;
+}
+
+.shipments {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.shipment-grid, .shipment-header-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.shipment-header-grid > span {
+  text-align: center;
+  border-left: 1px solid black;
+  font-weight: 700;
+  padding: 3px;
+}
+
+.shipment-grid > div {
+  padding: 10px;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.start-link {
+  color: #BD2D43;
+  text-decoration: none;
+}
+
+.start-link-grid-el {
+  text-align: center;
 }
