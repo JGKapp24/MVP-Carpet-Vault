@@ -33,6 +33,7 @@ module.exports = {
       });
     }
   },
+
   updateCarpetTagById: (req, res) => {
     models.updateCarpetTagById(req.params.carpetId, req.body.tagNum)
       .then(() => res.status(200).json({
@@ -43,6 +44,7 @@ module.exports = {
         error,
       }));
   },
+
   updateCarpetLocationById: (req, res) => {
     models.updateCarpetLocationById(req.params.carpetId, req.body.location)
       .then(() => res.status(200).json({
@@ -53,8 +55,9 @@ module.exports = {
         error,
       }));
   },
+
   updateCarpetRemoverById: (req, res) => {
-    models.updateCarpetRemoverById(req.params.carpetId, req.body.location)
+    models.updateCarpetRemoverById(req.params.carpetId, req.body.removedBy)
       .then(() => res.status(200).json({
         message: 'Successfully updated remover',
       }))

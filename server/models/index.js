@@ -3,20 +3,22 @@ const db = require('../../database/index.js');
 module.exports = {
   getAllShipments: () => {
     const sqlString = `SELECT shipments.*, carriers.carrier_name
-    FROM shipments INNERJOIN carriers
+    FROM shipments INNER JOIN carriers
     ON shipments.carrier_id = carriers.carrier_id`;
 
     return db.query(sqlString);
   },
 
   getCarpetByShipmentId: (shipmentId) => {
-    const sqlString = `SELECT carpet.*, vendors.vendor_name
-    FROM carpet
-    INNERJOIN vendors ON carpet.shipper_id = vendors.vendor_id
-    WHERE carpet.shipment_id = $1`;
+    const sqlString = `SELECT cpt.*, v1.vendor_name AS shipper_name, v2.vendor_name AS consignee_name
+    FROM carpet cpt
+    JOIN vendors v1 ON cpt.shipper_id = v1.vendor_id
+    JOIN vendors v2 ON cpt.consignee_id = v2.vendor_id
+    WHERE cpt.shipment_id = $1`;
 
-    db.query(sqlString, [shipmentId]);
+    return db.query(sqlString, [shipmentId]);
   },
+
   updateCarpetTagById: (carpetId, tagNum = null) => {
     const sqlString = 'UPDATE carpet SET tag_num = $1 WHERE carpet_id = $2';
     const sqlValues = [tagNum, carpetId];
