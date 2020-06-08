@@ -16,5 +16,9 @@ app.use(express.static(path.resolve(__dirname, '../client/dist')));
 // Router
 app.use('/data', router);
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
+});
+
 // eslint-disable-next-line no-console
 app.listen(PORT, () => console.log('Now listening on Port:', PORT));
