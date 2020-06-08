@@ -70,6 +70,12 @@ h2.header-title {
   text-decoration: none;
 }
 
-.start-link-grid-el {
-  text-align: center;
+.carpet-manifest {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.shipment-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
 }

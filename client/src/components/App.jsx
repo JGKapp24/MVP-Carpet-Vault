@@ -6,9 +6,9 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import Home from './Home.jsx';
-import Shipments from './Shipments.jsx';
-import CarpetManifest from './CarpetManifest.jsx';
+import Home from './Home/Home.jsx';
+import Shipments from './Shipments/Shipments.jsx';
+import CarpetManifest from './CarpetManifest/CarpetManifest.jsx';
 
 const App = () => (
   <Router>

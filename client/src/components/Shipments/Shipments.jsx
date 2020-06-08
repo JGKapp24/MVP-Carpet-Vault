@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header.jsx';
+import Header from '../Header.jsx';
 import ShipmentTableHeader from './ShipmentTableHeader.jsx';
 import ShipmentTableEntry from './ShipmentTableEntry.jsx';
 
