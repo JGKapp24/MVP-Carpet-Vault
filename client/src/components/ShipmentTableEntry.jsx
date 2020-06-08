@@ -10,7 +10,7 @@ const ShipmentTableEntry = ({ shipment }) => {
     <div className="shipment-grid">
       <div className="start-link-grid-el">
         <Link to={`/shipments/${shipment.shipment_id}/carpet`} className="start-link">
-          <span>{shipment.shipment_id}</span>
+          <span>{shipment.load_num}</span>
         </Link>
       </div>
       <div>{shipment.trailer_num}</div>

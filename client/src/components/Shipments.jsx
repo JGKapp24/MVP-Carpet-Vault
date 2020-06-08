@@ -33,7 +33,7 @@ class Shipments extends React.Component {
       <div className="shipments">
         <Header />
         <h1>Current Shipments</h1>
-        <p>Click on any Shipment ID to begin manifesting for that trailer.</p>
+        <p>Click on any Load Number to begin manifesting for that trailer.</p>
         <ShipmentTableHeader />
         {shipments.map((shipment) => (
           <ShipmentTableEntry key={shipment.shipment_id} shipment={shipment} />
