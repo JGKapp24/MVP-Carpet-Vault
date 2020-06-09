@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import CarpetTableEntry from './CarpetTableEntry.jsx';
 import CarpetTableHeader from './CarpetTableHeader.jsx';
