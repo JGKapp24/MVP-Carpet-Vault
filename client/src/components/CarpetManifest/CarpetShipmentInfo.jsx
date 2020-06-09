@@ -6,26 +6,38 @@ const CarpetShipmentInfo = ({ shipment }) => {
 
   return (
     <div className="shipment-info">
-      <span>
-        Carrier:
-        {' '}
-        {shipment.carrier_name}
-      </span>
-      <span>
-        Trailer Number:
-        {' '}
-        {shipment.trailer_num}
-      </span>
-      <span>
-        Ship Date:
-        {' '}
-        {shipDate}
-      </span>
-      <span>
-        Load Number:
-        {' '}
-        {shipment.load_num}
-      </span>
+      <div className="shipment-info-grid">
+        <span>
+          Carrier:
+        </span>
+        <span>
+          {shipment.carrier_name}
+        </span>
+      </div>
+      <div className="shipment-info-grid">
+        <span>
+          Trailer Number:
+        </span>
+        <span>
+          {shipment.trailer_num}
+        </span>
+      </div>
+      <div className="shipment-info-grid">
+        <span>
+          Ship Date:
+        </span>
+        <span>
+          {shipDate}
+        </span>
+      </div>
+      <div className="shipment-info-grid">
+        <span>
+          Load Number:
+        </span>
+        <span>
+          {shipment.load_num}
+        </span>
+      </div>
     </div>
   );
 };

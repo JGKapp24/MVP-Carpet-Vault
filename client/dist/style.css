@@ -17,6 +17,7 @@ h2.header-title {
   display: inline-block;
   margin: 0;
   color: #BD2D43;
+  font-weight: 700;
 }
 
 .home-links a {
@@ -43,6 +44,7 @@ h2.header-title {
 
 .shipments {
   font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
 }
 
 .shipment-grid, .shipment-header-grid {
@@ -72,10 +74,77 @@ h2.header-title {
 
 .carpet-manifest {
   font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
 }
 
 .shipment-info {
-  display: flex;
-  flex-direction: column;
   margin-left: 15px;
+}
+
+.shipment-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 400px;
+}
+
+.carpet-grid {
+  display: grid;
+  width: 600px;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+}
+
+.carpet-grid > span {
+  padding-top: 5px;
+  padding-right: 10px;
+}
+
+.justify-right {
+  text-align: right;
+}
+
+.justify-center {
+  text-align: center;
+}
+
+.light-top-border {
+  border-top: 1px solid lightgrey;
+}
+
+.thicker {
+  font-weight: 500;
+}
+
+.vendor-block {
+  margin-bottom: 5px;
+}
+
+.vendor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 500px;
+}
+
+.vendor-grid > span {
+  padding-right: 10px;
+}
+
+.tall {
+  font-size: 20px;
+}
+
+.filtered-vendor-roll-block {
+  margin-bottom: 25px;
+}
+
+.button-tag {
+  border-radius: 8px;
+  font-size: 12px;
+  background-color: white;
+  border: 2px solid #703D44;
+}
+
+.button-tag:hover {
+  cursor: pointer;
+  background-color: #BD2D43;
+  color: white;
 }
