@@ -4,7 +4,7 @@ import CarpetTableEntry from './CarpetTableEntry.jsx';
 import CarpetTableHeader from './CarpetTableHeader.jsx';
 import CarpetVendorBlock from '../CarpetVendorBlock.jsx';
 
-const LocatingCarpet = ({ carpet, locateRoll }) => {
+const LocatingCarpet = ({ carpet, locateRoll, undo }) => {
   let vendorStrs = carpet.map((roll) => `${roll.shipper_name}&&${roll.consignee_name}`);
   vendorStrs = Array.from(new Set(vendorStrs));
   vendorStrs.sort();
@@ -22,6 +22,7 @@ const LocatingCarpet = ({ carpet, locateRoll }) => {
                   key={roll.carpet_id}
                   roll={roll}
                   locateRoll={locateRoll}
+                  undo={undo}
                 />
               ))
           }
