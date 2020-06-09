@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Header from '../Header.jsx';
@@ -6,6 +7,7 @@ import CarpetShipmentInfo from './CarpetShipmentInfo.jsx';
 import CarpetFilterBar from './CarpetFilterBar.jsx';
 import UntaggedCarpet from './Untagged/UntaggedCarpet.jsx';
 import TaggedCarpet from './Tagged/TaggedCarpet.jsx';
+import LocatingCarpet from './Locating/LocatingCarpet.jsx';
 
 class CarpetManifest extends React.Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class CarpetManifest extends React.Component {
     this.getCarpetForCurrentShipment = this.getCarpetForCurrentShipment.bind(this);
     this.tagRoll = this.tagRoll.bind(this);
     this.removeRoll = this.removeRoll.bind(this);
+    this.locateRoll = this.locateRoll.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.filterAllCarpet = this.filterAllCarpet.bind(this);
   }
@@ -89,6 +92,22 @@ class CarpetManifest extends React.Component {
       .catch(console.log);
   }
 
+  locateRoll(carpetId, location) {
+    fetch(`/data/carpet/${carpetId}/locate`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        carpetId,
+        location,
+      }),
+    })
+      .then(this.getCarpetForCurrentShipment)
+      .then(this.filterAllCarpet)
+      .catch(console.log);
+  }
+
   handleFilterChange(filterSelection) {
     this.setState({
       filterSelection,
@@ -113,7 +132,6 @@ class CarpetManifest extends React.Component {
 
   render() {
     const {
-      carpet,
       shipment,
       filterSelection,
       untagged,
@@ -121,7 +139,13 @@ class CarpetManifest extends React.Component {
       locating,
       complete,
     } = this.state;
-    const { tagRoll, removeRoll, handleFilterChange } = this;
+
+    const {
+      tagRoll,
+      removeRoll,
+      locateRoll,
+      handleFilterChange,
+    } = this;
 
     const filteredSelection = () => {
       if (filterSelection === 0) {
@@ -129,6 +153,9 @@ class CarpetManifest extends React.Component {
       }
       if (filterSelection === 1) {
         return <TaggedCarpet removeRoll={removeRoll} carpet={tagged} />;
+      }
+      if (filterSelection === 2) {
+        return <LocatingCarpet locateRoll={locateRoll} carpet={locating} />;
       }
       return null;
     };
