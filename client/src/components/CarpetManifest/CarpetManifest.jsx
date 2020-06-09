@@ -30,6 +30,7 @@ class CarpetManifest extends React.Component {
     this.locateRoll = this.locateRoll.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.filterAllCarpet = this.filterAllCarpet.bind(this);
+    this.undo = this.undo.bind(this);
   }
 
   componentDidMount() {
@@ -109,6 +110,21 @@ class CarpetManifest extends React.Component {
       .catch(console.log);
   }
 
+  undo(carpetId, operation) {
+    fetch(`/data/carpet/${carpetId}/${operation}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        carpetId,
+      }),
+    })
+      .then(this.getCarpetForCurrentShipment)
+      .then(this.filterAllCarpet)
+      .catch(console.log);
+  }
+
   handleFilterChange(filterSelection) {
     this.setState({
       filterSelection,
@@ -146,6 +162,7 @@ class CarpetManifest extends React.Component {
       removeRoll,
       locateRoll,
       handleFilterChange,
+      undo,
     } = this;
 
     const filteredSelection = () => {
@@ -153,12 +170,12 @@ class CarpetManifest extends React.Component {
         return <UntaggedCarpet tagRoll={tagRoll} carpet={untagged} />;
       }
       if (filterSelection === 1) {
-        return <TaggedCarpet removeRoll={removeRoll} carpet={tagged} />;
+        return <TaggedCarpet removeRoll={removeRoll} carpet={tagged} undo={undo} />;
       }
       if (filterSelection === 2) {
-        return <LocatingCarpet locateRoll={locateRoll} carpet={locating} />;
+        return <LocatingCarpet locateRoll={locateRoll} carpet={locating} undo={undo} />;
       }
-      return <CompleteCarpet carpet={complete} />;
+      return <CompleteCarpet carpet={complete} undo={undo} />;
     };
 
     return (

@@ -29,13 +29,20 @@ class CarpetTableEntry extends React.Component {
   }
 
   render() {
-    const { roll } = this.props;
+    const { roll, undo } = this.props;
     const { location } = this.state;
     const { handleUpdate, handleClick } = this;
 
     return (
       <div className="carpet-grid locating light-top-border">
         <span className="justify-right">
+          <button
+            type="button"
+            className="button-tag undo"
+            onClick={() => undo(roll.carpet_id, 'remove')}
+          >
+            Undo
+          </button>
           {roll.piece_qty}
         </span>
         <span>
