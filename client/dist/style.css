@@ -116,6 +116,11 @@ h2.header-title {
   padding-right: 10px;
 }
 
+.carpet-grid > div {
+  padding-top: 5px;
+  padding-right: 10px;
+}
+
 .justify-right {
   text-align: right;
 }
@@ -196,4 +201,8 @@ h2.header-title {
 
 .filter-bar-grid > span.filter-selected {
   background: #F03A54;
+}
+
+.undo {
+  margin-right: 10px;
 }
