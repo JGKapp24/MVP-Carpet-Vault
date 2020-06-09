@@ -89,8 +89,8 @@ h2.header-title {
 
 .carpet-grid {
   display: grid;
-  width: 600px;
-  grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+  width: 700px;
+  grid-template-columns: 1fr 2fr 2fr 1fr 2fr;
 }
 
 .carpet-grid > span {
@@ -141,10 +141,42 @@ h2.header-title {
   font-size: 12px;
   background-color: white;
   border: 2px solid #703D44;
+  width: 25%;
 }
 
 .button-tag:hover {
   cursor: pointer;
   background-color: #BD2D43;
   color: white;
+}
+
+.input-tag {
+  display: inline-block;
+  width: 60%;
+  margin-right: 10px;
+}
+
+.filter-bar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 400px;
+  text-align: center;
+  margin: 10px;
+  font-size: 20px;
+}
+
+.filter-bar-grid > span {
+  background: #BD2D43;
+  border: 1px solid #703D44;
+  border-radius: 5px;
+  color: white;
+  padding: 6px;
+}
+
+.filter-bar-grid > span:hover {
+  cursor: pointer;
+}
+
+.filter-bar-grid > span.filter-selected {
+  background: #F03A54;
 }
