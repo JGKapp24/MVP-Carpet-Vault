@@ -3,10 +3,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Header from '../Header.jsx';
 import CarpetShipmentInfo from './CarpetShipmentInfo.jsx';
-import CarpetTableHeader from './CarpetTableHeader.jsx';
-import CarpetTableEntry from './CarpetTableEntry.jsx';
-import CarpetVendorBlock from './CarpetVendorBlock.jsx';
 import CarpetFilterBar from './CarpetFilterBar.jsx';
+import UntaggedCarpet from './Untagged/UntaggedCarpet.jsx';
 
 class CarpetManifest extends React.Component {
   constructor(props) {
@@ -14,21 +12,24 @@ class CarpetManifest extends React.Component {
     this.state = {
       carpet: [],
       shipment: {},
-      vendorCombinations: [],
       filterSelection: 0,
+      untagged: [],
+      tagged: [],
+      locating: [],
+      complete: [],
     };
 
     this.getShipment = this.getShipment.bind(this);
     this.getCarpetForCurrentShipment = this.getCarpetForCurrentShipment.bind(this);
-    this.collectVendorCombinations = this.collectVendorCombinations.bind(this);
     this.tagRoll = this.tagRoll.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.filterAllCarpet = this.filterAllCarpet.bind(this);
   }
 
   componentDidMount() {
     this.getShipment()
       .then(this.getCarpetForCurrentShipment)
-      .then(this.collectVendorCombinations);
+      .then(this.filterAllCarpet);
   }
 
   getShipment() {
@@ -54,18 +55,6 @@ class CarpetManifest extends React.Component {
       .catch(console.log);
   }
 
-  collectVendorCombinations() {
-    const { carpet } = this.state;
-
-    let vendorStrs = carpet.map((roll) => `${roll.shipper_name}&&${roll.consignee_name}`);
-    vendorStrs = Array.from(new Set(vendorStrs));
-    vendorStrs.sort();
-
-    this.setState({
-      vendorCombinations: vendorStrs,
-    });
-  }
-
   tagRoll(carpetId, tagNum) {
     fetch(`/data/carpet/${carpetId}/tag`, {
       method: 'PUT',
@@ -74,9 +63,11 @@ class CarpetManifest extends React.Component {
       },
       body: JSON.stringify({
         carpetId,
+        tagNum,
       }),
     })
       .then(this.getCarpetForCurrentShipment)
+      .then(this.filterAllCarpet)
       .catch(console.log);
   }
 
@@ -86,9 +77,32 @@ class CarpetManifest extends React.Component {
     });
   }
 
+  filterAllCarpet() {
+    const { carpet } = this.state;
+
+    const untagged = carpet.filter((roll) => roll.tag_num === null);
+    const tagged = carpet.filter((roll) => roll.tag_num && !roll.removedby);
+    const locating = carpet.filter((roll) => roll.tag_num && roll.removedby && !roll.location);
+    const complete = carpet.filter((roll) => roll.tag_num && roll.removedby && roll.location);
+
+    this.setState({
+      untagged,
+      tagged,
+      locating,
+      complete,
+    });
+  }
+
   render() {
-    // eslint-disable-next-line object-curly-newline
-    const { carpet, shipment, vendorCombinations, filterSelection } = this.state;
+    const {
+      carpet,
+      shipment,
+      filterSelection,
+      untagged,
+      tagged,
+      locating,
+      complete,
+    } = this.state;
     const { tagRoll, handleFilterChange } = this;
 
     return (
@@ -96,27 +110,15 @@ class CarpetManifest extends React.Component {
         <Header />
         {shipment ? <CarpetShipmentInfo shipment={shipment} /> : ''}
         <hr />
-        <CarpetFilterBar filterSelection={filterSelection} handleFilterChange={handleFilterChange} />
+        <CarpetFilterBar
+          filterSelection={filterSelection}
+          handleFilterChange={handleFilterChange}
+        />
         <div className="vendor-grid thicker tall">
           <span>Shipper</span>
           <span>Consginee</span>
         </div>
-        {vendorCombinations.map((vendorStr) => (
-          <div className="filtered-vendor-roll-block" key={vendorStr}>
-            <CarpetVendorBlock vendorStr={vendorStr} />
-            <CarpetTableHeader />
-            {
-              carpet.filter((roll) => `${roll.shipper_name}&&${roll.consignee_name}` === vendorStr)
-                .map((roll) => (
-                  <CarpetTableEntry
-                    key={roll.carpet_id}
-                    roll={roll}
-                    tagRoll={tagRoll}
-                  />
-                ))
-            }
-          </div>
-        ))}
+        <UntaggedCarpet tagRoll={tagRoll} carpet={untagged} />
       </div>
     );
   }
