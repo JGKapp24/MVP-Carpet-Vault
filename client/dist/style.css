@@ -105,6 +105,12 @@ h2.header-title {
   grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1fr 2fr;
 }
 
+.carpet-grid.complete {
+  display: grid;
+  width: 850px;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr 1fr 1fr;
+}
+
 .carpet-grid > span {
   padding-top: 5px;
   padding-right: 10px;

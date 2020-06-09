@@ -8,6 +8,7 @@ import CarpetFilterBar from './CarpetFilterBar.jsx';
 import UntaggedCarpet from './Untagged/UntaggedCarpet.jsx';
 import TaggedCarpet from './Tagged/TaggedCarpet.jsx';
 import LocatingCarpet from './Locating/LocatingCarpet.jsx';
+import CompleteCarpet from './Complete/CompleteCarpet.jsx';
 
 class CarpetManifest extends React.Component {
   constructor(props) {
@@ -157,7 +158,7 @@ class CarpetManifest extends React.Component {
       if (filterSelection === 2) {
         return <LocatingCarpet locateRoll={locateRoll} carpet={locating} />;
       }
-      return null;
+      return <CompleteCarpet carpet={complete} />;
     };
 
     return (
