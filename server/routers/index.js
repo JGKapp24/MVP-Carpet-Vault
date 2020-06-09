@@ -3,6 +3,8 @@ const controllers = require('../controllers/index.js');
 
 router.get('/shipments', controllers.getAllShipments);
 
+router.get('/shipments/:shipmentId', controllers.getShipmentById);
+
 router.get('/shipments/:shipmentId/carpet', controllers.getCarpetByShipmentId);
 
 router.put('/carpet/:carpetId/tag', controllers.updateCarpetTagById);

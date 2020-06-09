@@ -13,6 +13,28 @@ module.exports = {
         error,
       }));
   },
+
+  getShipmentById: (req, res) => {
+    const { shipmentId } = req.params;
+
+    if (shipmentId) {
+      models.getShipmentById(shipmentId)
+        .then((results) => results.rows)
+        .then(([shipment]) => res.status(200).json({
+          message: 'Successfully retrieved shipment',
+          shipment,
+        }))
+        .catch((error) => res.status(400).json({
+          message: 'failed to retrieve shipment',
+          error,
+        }));
+    } else {
+      res.status(400).json({
+        message: 'bad request - must be a shipmentId',
+      });
+    }
+  },
+
   getCarpetByShipmentId: (req, res) => {
     const { shipmentId } = req.params;
 
