@@ -5,7 +5,7 @@ class CarpetTableEntry extends React.Component {
     super(props);
 
     this.state = {
-      tagInput: '',
+      removedBy: '',
     };
 
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -14,26 +14,26 @@ class CarpetTableEntry extends React.Component {
 
   handleUpdate(e) {
     this.setState({
-      tagInput: e.target.value,
+      removedBy: e.target.value,
     });
   }
 
   handleClick() {
-    const { tagInput } = this.state;
-    const { roll, tagRoll } = this.props;
+    const { removedBy } = this.state;
+    const { roll, removeRoll } = this.props;
 
-    if (tagInput !== '') {
-      tagRoll(roll.carpet_id, tagInput);
+    if (removedBy !== '') {
+      removeRoll(roll.carpet_id, removedBy);
     }
   }
 
   render() {
     const { roll } = this.props;
-    const { tagInput } = this.state;
+    const { removedBy } = this.state;
     const { handleUpdate, handleClick } = this;
 
     return (
-      <div className="carpet-grid untagged light-top-border">
+      <div className="carpet-grid tagged light-top-border">
         <span className="justify-right">
           {roll.piece_qty}
         </span>
@@ -46,9 +46,12 @@ class CarpetTableEntry extends React.Component {
         <span>
           {roll.roll_yards.toFixed(2)}
         </span>
+        <span>
+          {roll.tag_num}
+        </span>
         <div>
-          <input type="text" value={tagInput} className="input-tag" onChange={handleUpdate} />
-          <button type="button" className="button-tag" onClick={handleClick}>Tag</button>
+          <input type="text" value={removedBy} className="input-tag" onChange={handleUpdate} />
+          <button type="button" className="button-tag" onClick={handleClick}>Remove</button>
         </div>
       </div>
     );

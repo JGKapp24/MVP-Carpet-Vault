@@ -1,9 +1,9 @@
 import React from 'react';
 import CarpetTableEntry from './CarpetTableEntry.jsx';
 import CarpetTableHeader from './CarpetTableHeader.jsx';
-import CarpetVendorBlock from './CarpetVendorBlock.jsx';
+import CarpetVendorBlock from '../CarpetVendorBlock.jsx';
 
-const UntaggedCarpet = ({ carpet, tagRoll }) => {
+const UntaggedCarpet = ({ carpet, removeRoll }) => {
   let vendorStrs = carpet.map((roll) => `${roll.shipper_name}&&${roll.consignee_name}`);
   vendorStrs = Array.from(new Set(vendorStrs));
   vendorStrs.sort();
@@ -20,7 +20,7 @@ const UntaggedCarpet = ({ carpet, tagRoll }) => {
                 <CarpetTableEntry
                   key={roll.carpet_id}
                   roll={roll}
-                  tagRoll={tagRoll}
+                  removeRoll={removeRoll}
                 />
               ))
           }

@@ -87,10 +87,16 @@ h2.header-title {
   width: 400px;
 }
 
-.carpet-grid {
+.carpet-grid.untagged {
   display: grid;
   width: 700px;
   grid-template-columns: 1fr 2fr 2fr 1fr 2fr;
+}
+
+.carpet-grid.tagged {
+  display: grid;
+  width: 850px;
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr 2fr;
 }
 
 .carpet-grid > span {
@@ -141,7 +147,6 @@ h2.header-title {
   font-size: 12px;
   background-color: white;
   border: 2px solid #703D44;
-  width: 25%;
 }
 
 .button-tag:hover {
@@ -152,7 +157,7 @@ h2.header-title {
 
 .input-tag {
   display: inline-block;
-  width: 60%;
+  width: 50%;
   margin-right: 10px;
 }
 

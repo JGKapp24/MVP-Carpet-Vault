@@ -5,6 +5,7 @@ import Header from '../Header.jsx';
 import CarpetShipmentInfo from './CarpetShipmentInfo.jsx';
 import CarpetFilterBar from './CarpetFilterBar.jsx';
 import UntaggedCarpet from './Untagged/UntaggedCarpet.jsx';
+import TaggedCarpet from './Tagged/TaggedCarpet.jsx';
 
 class CarpetManifest extends React.Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class CarpetManifest extends React.Component {
     this.getShipment = this.getShipment.bind(this);
     this.getCarpetForCurrentShipment = this.getCarpetForCurrentShipment.bind(this);
     this.tagRoll = this.tagRoll.bind(this);
+    this.removeRoll = this.removeRoll.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.filterAllCarpet = this.filterAllCarpet.bind(this);
   }
@@ -71,6 +73,22 @@ class CarpetManifest extends React.Component {
       .catch(console.log);
   }
 
+  removeRoll(carpetId, removedBy) {
+    fetch(`/data/carpet/${carpetId}/remove`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        carpetId,
+        removedBy,
+      }),
+    })
+      .then(this.getCarpetForCurrentShipment)
+      .then(this.filterAllCarpet)
+      .catch(console.log);
+  }
+
   handleFilterChange(filterSelection) {
     this.setState({
       filterSelection,
@@ -103,7 +121,17 @@ class CarpetManifest extends React.Component {
       locating,
       complete,
     } = this.state;
-    const { tagRoll, handleFilterChange } = this;
+    const { tagRoll, removeRoll, handleFilterChange } = this;
+
+    const filteredSelection = () => {
+      if (filterSelection === 0) {
+        return <UntaggedCarpet tagRoll={tagRoll} carpet={untagged} />;
+      }
+      if (filterSelection === 1) {
+        return <TaggedCarpet removeRoll={removeRoll} carpet={tagged} />;
+      }
+      return null;
+    };
 
     return (
       <div className="carpet-manifest">
@@ -118,7 +146,7 @@ class CarpetManifest extends React.Component {
           <span>Shipper</span>
           <span>Consginee</span>
         </div>
-        <UntaggedCarpet tagRoll={tagRoll} carpet={untagged} />
+        {filteredSelection()}
       </div>
     );
   }
